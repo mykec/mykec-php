@@ -2,7 +2,7 @@
 
    /* 
     *  "MYKEC.PHP"
-    *  (Version 2015.05.03)
+    *  (Version 2020-01-28)
     *  
     *  Copyright © 2000-2020 Myke Carter
     * 
@@ -22,14 +22,46 @@
     */
 
        ###################################
-      # COPYRIGHT 2000-2015 MYKE CARTER #
-     # July 7, 2000 thru May 3, 2015 ###
-    #################################
+      # COPYRIGHT 2000-2020 MYKE CARTER ####
+     # July 7, 2000 thru January 28, 2020 #
+    ######################################
     # DON'T PANIC! ... Uncomment the following line to disable the entire system:
     # die('This site is temporarily unavailable due to scheduled maintenance.<br />We apologize for any inconvenience this may cause.');
     #
     # ini_set('display_errors', TRUE);
     # ini_set('error_reporting', E_ALL);
+
+      ##############
+     # PREPRINT() #
+    ##############
+
+    function preprint( &$specimen, $killer=null, $name=null, $raw=null )
+    {
+        OpenDiv(css('left'));
+            OpenPre(css('preprint'));
+
+                if( !empty( $name ))
+                    echo( "\$$name = " );
+
+                if( !empty( $specimen ))
+                    print_r( $raw ? $specimen : var_dump( $specimen ));
+
+                else {
+                    switch( gettype($specimen)) {
+                        case 'NULL'   : echo( 'Empty (NULL)'  ); break;
+                        case 'string' : echo( 'Empty (\'\')'  ); break;
+                        case 'integer': echo( 'Empty (0)'     ); break;
+                        case 'boolean': echo( 'Empty (false)' ); break;
+                        default       : echo( 'Empty (???)'   ); break;
+                    }
+                }
+
+            ClosePre();
+        CloseDiv();
+
+        if( empty( $killer ))
+            die();
+    }
 
       ################
      # CUSTOM CALLS #
@@ -49,16 +81,16 @@
      # HTML WRAPPERS #
     #################
 
-    function  Abbr($x="",$y='')        { echo "<abbr".$x.">$y</abbr>"; }
+    function  Abbr($x='',$y='')        { echo "<abbr".$x.">$y</abbr>"; }
     function  Address($x,$y='')        { echo "<address".$x.">$y</address>"; }
     function  Anchor($x,$y='')         { echo "<a".$x.">$y</a>"; }
     function  Area($x)                 { echo "<area".$x." />"; }
     function  Article($x='',$y='')     { echo "\n\n  <article".$x.">$y</article>"; }
     function  Aside($x='',$y='')       { echo "\n\n  <aside".$x.">$y</aside>"; }
     function  Audio($x='',$y='')       { echo "\n  <audio".$x.">$y</audio>"; }
-    function  B($x="",$y='')           { echo "<b".$x.">$y</b>"; }
-    function  Bdi($x="",$y='')         { echo "<bdi".$x.">$y</bdi>"; }
-    function  Bdo($x="",$y='')         { echo "<bdo".$x.">$y</bdo>"; }
+    function  B($x='',$y='')           { echo "<b".$x.">$y</b>"; }
+    function  Bdi($x='',$y='')         { echo "<bdi".$x.">$y</bdi>"; }
+    function  Bdo($x='',$y='')         { echo "<bdo".$x.">$y</bdo>"; }
     function  BR()                     { echo "<br />\n"; }
     function  BRBR()                   { echo "\n  <br /> <br />\n"; }
     function  Basefont($x)             { echo "\n<basefont".$x.">"; }
@@ -73,7 +105,7 @@
         for ( $i = -1; $i < $post; ++$i ) N();
     }
     function  Datalist($x='',$y='')    { echo "\n\n<datalist".$x.">$y</datalist>"; }
-    function  Dfn($x="",$y='')         { echo "<dfn".$x.">$y</dfn>"; }
+    function  Dfn($x='',$y='')         { echo "<dfn".$x.">$y</dfn>"; }
     function  DList($x='',$y='')       { echo "\n\n<dl".$x.">$y</dl>"; }
     function  DT($x='',$y='')          { echo "\n\n    <dt".$x.">$y</dt>"; }
     function  DD($x='',$y='')          { echo "\n\n        <dd".$x.">$y</dd>"; }
@@ -81,8 +113,6 @@
     function  Dialog($x='',$y='')      { echo "\n\n  <dialog".$x.">$y</dialog>"; }
     function  Div($x='',$y='')         { echo "\n\n  <div".$x.">$y</div>"; }
     function  DocTypeHTML5()           { echo "<!DOCTYPE html>\n\n"; }
-    function  DocTypeX11()             { echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n\n"; }
-    function  DocTypeX10()             { echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n\n"; }
     function  DocTypeXFrameset()       { echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">\n\n"; }
     function  DropAnchor($x, $y='')    { echo "\n<div".css($y)."><a id=\"".$x."\"></a></div>\n"; }
     function  Embed($x='')             { echo "\n    <embed".$x." />"; }
@@ -93,7 +123,7 @@
     function  Figure($x='',$y='')      { echo "\n\n  <figure".$x.">$y</figure>"; }
     function  Form($x='',$y='')        { echo ($y > '') ? "\n  <form".$x.">".$y."</form>" : "\n  <form>$x</form>"; }
     function  Footer($x='',$y='')      { echo "\n\n  <footer".$x.">$y</footer>"; }
-    function  H($x=2,$y='',$z='')      { echo "<h".$x.$y.">".$z."</h".$x.">"; }
+    function  H($x='2',$y='',$z='')    { echo "<h".$x.$y.">".$z."</h".$x.">"; }
     function  HeaderDiv($x='',$y='')   { echo "\n\n  <header".$x.">$y</header>"; }
     function  HR($x='')                { echo "\n<hr".$x.">\n"; }
     function  Hyperlink($x,$y)         { echo "<a".$x.">".$y."</a>"; }
@@ -131,7 +161,7 @@
     function  Script($x,$y='',$z='')   { echo "\n".$z."<script".$x.">$y</script>"; }
     function  Select($x,$y)            { echo "\n<select".$x.">$y</select>"; }
     function  Source($x)               { echo "\n<source".$x." />"; }
-    function  Stylesheet($x,$y='')     { echo "\n<style".$x.">$y</style>"; }
+    function  Stylesheet($x=' type="text/css"',$y='') { echo "\n<style".$x.">$y</style>"; }
     function  Svg($x='',$y='')         { echo "\n  <svg".$x.">$y</svg>"; }
     function  Table($x='',$y='')       { echo "\n\n  <table".$x.">$y</table>"; }
     function  TextArea($x,$y)          { echo "\n  <textarea".$x.">".$y."</textarea>"; }
@@ -209,7 +239,7 @@
     function  OpenSection($x)       { echo "\n  <section".$x.">"; }
     function  OpenSelect($x)        { echo "\n      <select".$x.">"; }
     function  OpenSpan($x='')       { echo "\n\n  <span".$x.">"; }
-    function  OpenStyle($x=" type=\"text/css\"") { echo "\n  <style".$x.">"; }
+    function  OpenStyle($x=' type="text/css"') { echo "\n  <style".$x.">"; }
     function  OpenSummary($x='')    { echo "\n\n  <summary".$x.">"; }
     function  OpenSvg($x='')        { echo "\n  <svg".$x.">"; }
     function  OpenTable($x='')      { echo "\n\n  <table".$x.">"; }
@@ -356,7 +386,7 @@
     function  formvar       ($x='', $y=''       ) { return "<form".$x.">$y</form>"; }
     function  headvar       ($x='', $y=''       ) { return "\n<head".$x.">$y\n</head>"; }
     function  headervar     ($x='', $y=''       ) { return "\n<header".$x.">$y\n</header>"; }
-    function  hvar          ($x=2,  $y='', $z='') { return "<h".$x.$y.">".$z."</h".$x.">"; }
+    function  hvar          ($x='2',$y='', $z='') { return "<h".$x.$y.">".$z."</h".$x.">"; }
     function  htmlvar       ($x='', $y=''       ) { return "<html".$x.">$y\n</html>"; }
     function  iframevar     ($x=''              ) { return "\n<iframe".$x."></iframe>"; }
     function  imagevar      ($x=''              ) { return "<img".$x." />"; }
@@ -388,6 +418,7 @@
     function  sourcevar     ($x=''              ) { return "\n<source".$x." />"; }
     function  spanvar       ($x='', $y=''       ) { return "<span".$x.">$y</span>"; }
     function  stylevar      ($x='', $y=''       ) { return "\n<style".$x.">\n<!--\n$y\n// -->\n</style>"; }
+    function  localstylevar ($x                 ) { return "\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"".$x."\" />"; }
     function  summaryvar    ($x='', $y=''       ) { return "<summary".$x.">$y</summary>"; }
     function  svgvar        ($x='', $y=''       ) { return "\n<svg".$x.">$y</svg>\n"; }
     function  tablevar      ($x='', $y=''       ) { return "\n<table".$x.">$y</table>"; }
@@ -422,8 +453,8 @@
     function  action($x='')                    { return XHTML_std ( "action",                $x ) ; }
     function  align($x='left')                 { return XHTML_std ( "align",                 $x ) ; }
     function  alink($x='')                     { return XHTML_std ( "alink",                 $x ) ; }
-    function  autocomplete($x="on")            { return XHTML_std ( "autocomplete",          $x ) ; }
-    function  autoplay($x="no")                { return XHTML_std ( "autoplay",              $x ) ; }
+    function  autocomplete($x='on')            { return XHTML_std ( "autocomplete",          $x ) ; }
+    function  autoplay($x='no')                { return XHTML_std ( "autoplay",              $x ) ; }
     function  background($x='')                { return XHTML_std ( "background",            $x ) ; }
     function  bgcolor($x='')                   { return XHTML_std ( "bgcolor",               $x ) ; }
     function  border($x='0')                   { return XHTML_std ( "border",                $x ) ; }
@@ -589,4 +620,3 @@
 
     if( file_exists( __DIR__.'/loose-cannons.php'))
         include_once(__DIR__.'/loose-cannons.php');
-
