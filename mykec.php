@@ -108,7 +108,6 @@
     function  LinkRel($x)              { echo "\n    <link".$x." />"; }
     function  Main($x='',$y='')        { echo "\n\n  <main".$x.">$y</main>"; }
     function  Mark($x='',$y='')        { echo "\n\n  <mark".$x.">$y</mark>"; }
-    function  Menuitem($x,$y)          { echo "\n  <menuitem".$x.">".$y."</menuitem>"; }
     function  Meta($x)                 { echo "\n    <meta".$x." />"; }
     function  Meter($x='',$y='')       { echo "\n\n  <meter".$x.">$y</meter>"; }
     function  N()                      { echo "\n"; }
@@ -161,11 +160,9 @@
     function  OpenBdi()             { echo "<bdi>"; }
     function  OpenBdo()             { echo "<bdo>"; }
     function  OpenBody($x='')       { echo "\n  <body".$x.">"; }
-    function  OpenBlink()           { echo "<blink>"; }
     function  OpenBlockquote()      { echo "\n  <blockquote>"; }
     function  OpenButton($x='')     { echo "\n  <button".$x.">"; }
     function  OpenCanvas($x='')     { echo "\n  <canvas".$x.">"; }
-    function  OpenCenter()          { echo "\n  <center>"; }
     function  OpenCite()            { echo "<cite>"; }
     function  OpenComment()         { echo "\n<!--\n"; }
     function  OpenDetails($x='')    { echo "\n  <details".$x.">"; }
@@ -196,7 +193,6 @@
     function  OpenMain($x='')       { echo "\n  <main".$x.">"; }
     function  OpenMark($x='')       { echo "\n  <mark".$x.">"; }
     function  OpenMap($x='')        { echo "\n  <map".$x.">"; }
-    function  OpenMenuitem($x='')   { echo "\n  <menuitem".$x.">"; }
     function  OpenMeter($x='')      { echo "\n  <meter".$x.">"; }
     function  OpenNav($x='')        { echo "\n  <nav".$x.">"; }
     function  OpenOL($x='')         { echo "\n\n  <ol".$x.">\n"; }
@@ -238,18 +234,16 @@
     function  CloseB()           { echo "</b>"; }
     function  CloseBdi()         { echo "</bdi>"; }
     function  CloseBdo()         { echo "</bdo>"; }
-    function  CloseBlink()       { echo "</blink>"; }
     function  CloseBlockquote()  { echo "\n  </blockquote>"; }
     function  CloseBody()        { echo "\n  </body>"; }
     function  CloseButton()      { echo "\n  </button>"; }
     function  CloseCanvas()      { echo "\n  </canvas>"; }
-    function  CloseCenter()      { echo "\n  </center>"; }
     function  CloseCite()        { echo "</cite>"; }
     function  CloseComment()     { echo "\n-->"; }
     function  CloseDatalist()    { echo "</datalist>"; }
-    function  CloseDetails()     { echo "\n  </details".$x.">"; }
+    function  CloseDetails()     { echo "\n  </details>"; }
     function  CloseDfn()         { echo "</dfn>"; }
-    function  CloseDialog()      { echo "\n  </dialog".$x.">"; }
+    function  CloseDialog()      { echo "\n  </dialog>"; }
     function  CloseDiv()         { echo "</div>"; }
     function  CloseDL()          { echo "</dl>"; }
     function  CloseDT()          { echo "</dt>"; }
@@ -273,7 +267,6 @@
     function  CloseMain()        { echo "\n  </main>"; }
     function  CloseMark()        { echo "</mark>\n"; }
     function  CloseMap()         { echo "\n  </map>"; }
-    function  CloseMenuitem()    { echo "\n  </menuitem>"; }
     function  CloseMeter()       { echo "\n  </meter>"; }
     function  CloseNav()         { echo "\n  </nav>"; }
     function  CloseOptgroup()    { echo "\n  </optgroup>"; }
@@ -373,7 +366,6 @@
     function  livar         ($x                 ) { return "\n<li>".$x."</li>"; }
     function  li2var        ($x='', $y=''       ) { return "\n<li".$x.">$y</li>"; }
     function  mainvar       ($x='', $y=''       ) { return "\n<main".$x.">$y\n</main>"; }
-    function  menuitemvar   ($x='', $y=''       ) { return "\n<menuitem".$x.">$y\n</menuitem>"; }
     function  markvar       ($x='', $y=''       ) { return "<mark".$x.">$y</mark>"; }
     function  metervar      ($x='', $y=''       ) { return "\n<meter".$x.">$y\n</meter>"; }
     function  navvar        ($x='', $y=''       ) { return "\n<nav".$x.">$y\n</nav>"; }
@@ -458,6 +450,7 @@
     function  id($x='')                        { return XHTML_std ( "id",                    $x ) ; }
     function  kind($x='')                      { return XHTML_std ( "kind",                  $x ) ; }
     function  label($x='')                     { return XHTML_std ( "label",                 $x ) ; }
+    function  labelfor($x='')                  { return XHTML_std ( "for",                   $x ) ; }
     function  lang($x='')                      { return XHTML_std ( "lang",                  $x ) ; }
     function  language($x='')                  { return XHTML_std ( "language",              $x ) ; }
     function  leftmargin($x='')                { return XHTML_std ( "leftmargin",            $x ) ; }
@@ -483,6 +476,7 @@
     function  onMouseUp($x='')                 { return XHTML_std ( "onmouseup",             $x ) ; }
     function  onReset($x='')                   { return XHTML_std ( "onreset",               $x ) ; }
     function  onSubmit($x='')                  { return XHTML_std ( "onsubmit",              $x ) ; }
+    function  outputfor($x='')                 { return XHTML_std ( "for",                   $x ) ; }
     function  pluginspage($x='')               { return XHTML_std ( "pluginspage",           $x ) ; }
     function  property($x='')                  { return XHTML_std ( "property",              $x ) ; }
     function  rel($x='')                       { return XHTML_std ( "rel",                   $x ) ; }
